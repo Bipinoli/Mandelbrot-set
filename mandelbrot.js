@@ -1,5 +1,3 @@
-console.log("js file loaded");
-
 const canvas = document.getElementById("myCanvas");
 const context = canvas.getContext("2d");
 
@@ -9,13 +7,13 @@ function map(s1, d1, x, s2, d2) {
 }
 
 // takes pixel as an input
-function mathWork(px, py) 
+function mathWork(px, py, col) 
 {
 	// f(c) = z^2 + c
 	let oldx = px;
 	let oldy = py;
 
-	for (let i=0; i<100; i++) {
+	for (let i=0; i<10*col; i++) {
 		let x = px*px - py*py + oldx;
 		let y = 2*px*py + oldy;
 		px = x;
@@ -34,11 +32,10 @@ for (let x=0; x<canvas.width; x++)
 
 		let px = map(0, canvas.width, x, -2, 2);
 		let py = map(0, canvas.height, y, -2, 2);
-		let bright = mathWork(px, py)*255 | 0;
 
-		let r1 = bright;
-		let r2 = bright;
-		let r3 = bright;
+		let r1 = mathWork(px, py, 2)*255 | 0;
+		let r2 = mathWork(px, py, 5.1)*255 | 0;
+		let r3 = mathWork(px, py, 21.2)*255 | 0;
 
 		context.fillStyle = "rgb(" + r1 + "," + r2 + "," + r3 + ")";
 		context.fillRect(x,y,1,1);
